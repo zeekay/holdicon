@@ -1,0 +1,23 @@
+#!/usr/bin/env node
+var inquirer = require("inquirer");
+
+inquirer.prompt([
+    {
+        type: "checkbox",
+        message: "Select dependencies.",
+        name: "dependencies",
+        choices: [
+            new inquirer.Separator("Dependencies:"),
+            {
+                name: "jQuery",
+                checked: true
+            },
+            {
+                name: "Bootstrap",
+            },
+            {
+                name: "HTML5 Boilerplate",
+            }
+        ]
+    }
+])
