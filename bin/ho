@@ -1,23 +1,36 @@
 #!/usr/bin/env node
-var inquirer = require("inquirer");
+
+var inquirer = require('inquirer');
+var ho = require('../');
 
 inquirer.prompt([
-    {
-        type: "checkbox",
-        message: "Select dependencies.",
-        name: "dependencies",
-        choices: [
-            new inquirer.Separator("Dependencies:"),
-            {
-                name: "jQuery",
-                checked: true
-            },
-            {
-                name: "Bootstrap",
-            },
-            {
-                name: "HTML5 Boilerplate",
-            }
-        ]
+  {
+    type: 'checkbox',
+    message: 'Select dependencies.',
+    name: 'dependencies',
+    choices: [
+      new inquirer.Separator('Dependencies:'),
+      {
+        name: 'jQuery',
+        checked: true
+      },
+      {
+        name: 'Bootstrap',
+      },
+      {
+        name: 'HTML5 Boilerplate',
+      }
+    ],
+    validate: function(deps) {
+      console.log(deps)
+      if (deps.length === 0) {
+        console.log('You have chosen...wisely.')
+      }
+      return true;
     }
-])
+  }
+], function(answer) {
+  answer.dependencies.forEach(function(dep) {
+    ho.removeAnnoyance(dep)
+  })
+})
